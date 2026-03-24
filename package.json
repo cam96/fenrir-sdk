@@ -1,0 +1,13 @@
+{
+  "name": "fenrir-sdk",
+  "version": "1.0.0",
+  "description": "Copilot customization assets (instructions, prompts, agents) for Blazor, Web API, Azure Functions, T-SQL, and C# projects.",
+  "bin": {
+    "fenrir-sdk": "./bin/sync.js"
+  },
+  "keywords": ["copilot", "github-copilot", "blazor", "csharp", "azure-functions", "tsql", "web-api"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
