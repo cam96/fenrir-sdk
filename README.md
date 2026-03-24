@@ -55,7 +55,7 @@ scripts/
 | Instructions | `.instructions.md` | `.github/instructions/` | Rules automatically applied by Copilot based on `applyTo` glob |
 | Prompts | `.prompt.md` | `.github/prompts/` | Reusable prompt templates invokable from Copilot Chat |
 | Agents | `.agent.md` | `.github/agents/` | Custom agent modes with specific tool sets and personas |
-| Skills | `SKILL.md` | `~/.agents/skills/{name}/` | Domain-specific knowledge invokable by name in Copilot Chat |
+| Skills | `SKILL.md` | `.github/skills/{name}/` | Domain-specific knowledge invokable by name in Copilot Chat |
 
 ## Using in a Consuming Project
 
@@ -63,56 +63,54 @@ Both scenarios use `npx` to run the sync directly from this GitHub repository �
 
 The sync copies two things:
 
-1. **`.github/` assets** — instructions, prompts, and agents merged into your project's `.github/` folder
-2. **Skills** — installed into your user-level `~/.agents/skills/` directory so VS Code Copilot can invoke them by name
+All assets — instructions, prompts, agents, and skills — are merged into your project's `.github/` folder.
 
 ```
 .github/
 ├── instructions/    ← merged from common + selected types
 ├── prompts/         ← merged from common + selected types
-└── agents/          ← merged from selected types
-
-~/.agents/skills/
-├── csharp-async/           ← from csharp
-├── csharp-xunit/           ← from csharp
-├── dotnet-best-practices/  ← from csharp
-├── ef-core/                ← from csharp
-├── fluentui-blazor/        ← from blazor
-└── ...                     ← etc.
+├── agents/          ← merged from selected types
+└── skills/          ← merged from selected types
+    ├── csharp-async/
+    ├── csharp-xunit/
+    ├── dotnet-best-practices/
+    ├── ef-core/
+    ├── fluentui-blazor/
+    └── ...
 ```
 
 ---
 
-### Scenario 1 — Fresh install into a project
+### Fresh install into a project
 
-Run this from the **root of your project**. Replace `your-org` with the GitHub user or organization that owns this repository. Specify one or more project types with `--types`.
+Run this from the **root of your project**. Replace `cam96` with the GitHub user or organization that owns this repository. Specify one or more project types with `--types`.
 
 ```powershell
 # Blazor project
-npx github:your-org/fenrir-sdk --types blazor
+npx github:cam96/fenrir-sdk --types blazor
 
 # Blazor project with C# standards (recommended — Blazor uses C#)
-npx github:your-org/fenrir-sdk --types blazor,csharp
+npx github:cam96/fenrir-sdk --types blazor,csharp
 
 # Web API project with C# and T-SQL
-npx github:your-org/fenrir-sdk --types web-api,csharp,tsql
+npx github:cam96/fenrir-sdk --types web-api,csharp,tsql
 
 # Azure Functions project
-npx github:your-org/fenrir-sdk --types function-app,csharp
+npx github:cam96/fenrir-sdk --types function-app,csharp
 ```
 
 ---
 
-### Scenario 2 — Update an already-installed project to the latest assets
+### Update an already-installed project to the latest assets
 
 `npx` caches packages locally. To force it to fetch the latest version from GitHub and overwrite existing files, add the `--yes` flag:
 
 ```powershell
 # Update a Blazor + C# project to the latest assets
-npx --yes github:your-org/fenrir-sdk --types blazor,csharp
+npx --yes github:cam96/fenrir-sdk --types blazor,csharp
 
 # Update a Web API project
-npx --yes github:your-org/fenrir-sdk --types web-api,csharp,tsql
+npx --yes github:cam96/fenrir-sdk --types web-api,csharp,tsql
 ```
 
 > The `--yes` flag bypasses the npx cache and re-downloads the repository, ensuring you always get the latest instructions, prompts, and agents. Run this whenever the SDK has been updated.
@@ -132,7 +130,7 @@ npx --yes github:your-org/fenrir-sdk --types web-api,csharp,tsql
 Multiple types can be combined in a single run:
 
 ```powershell
-npx github:your-org/fenrir-sdk --types blazor,csharp,tsql
+npx github:cam96/fenrir-sdk --types blazor,csharp,tsql
 ```
 
 ---

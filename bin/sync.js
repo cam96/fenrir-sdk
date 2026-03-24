@@ -45,10 +45,6 @@ const targetGithubDir = path.join(process.cwd(), ".github");
 // ---------------------------------------------------------------------------
 const sources = ["common", ...requestedTypes];
 
-// User-level skills directory (~/.agents/skills on all platforms)
-const home = process.env.HOME || process.env.USERPROFILE || "";
-const userSkillsBase = path.join(home, ".agents", "skills");
-
 for (const source of sources) {
   const sourceDir = path.join(sdkGithubDir, source);
 
@@ -60,20 +56,19 @@ for (const source of sources) {
   for (const subDir of fs.readdirSync(sourceDir, { withFileTypes: true })) {
     if (!subDir.isDirectory()) continue;
 
-    // Skills go to the user-level agents directory, not into .github/
+    const srcPath  = path.join(sourceDir, subDir.name);
+    const destPath = path.join(targetGithubDir, subDir.name);
+
+    // Skills: merge each skill folder into .github/skills/{skillname}/
     if (subDir.name === "skills") {
-      const skillsDir = path.join(sourceDir, "skills");
-      for (const skill of fs.readdirSync(skillsDir, { withFileTypes: true })) {
+      for (const skill of fs.readdirSync(srcPath, { withFileTypes: true })) {
         if (!skill.isDirectory()) continue;
-        const skillDest = path.join(userSkillsBase, skill.name);
-        copyDirRecursive(path.join(skillsDir, skill.name), skillDest);
-        console.log(`  Installed skill [${skill.name}] -> [~/.agents/skills/${skill.name}]`);
+        const skillDest = path.join(destPath, skill.name);
+        copyDirRecursive(path.join(srcPath, skill.name), skillDest);
+        console.log(`  Synced [${source}/skills/${skill.name}] -> [.github/skills/${skill.name}]`);
       }
       continue;
     }
-
-    const srcPath  = path.join(sourceDir, subDir.name);
-    const destPath = path.join(targetGithubDir, subDir.name);
 
     copyDirRecursive(srcPath, destPath);
     console.log(`  Synced [${source}/${subDir.name}] -> [.github/${subDir.name}]`);
