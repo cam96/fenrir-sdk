@@ -8,7 +8,7 @@
 
 </div>
 
-# Purpose
+## Purpose
 
 Most teams copy-paste Copilot instructions between repos, let them drift out of sync, and end up with inconsistent AI behaviour across projects. **fenrir-sdk** solves that.
 
