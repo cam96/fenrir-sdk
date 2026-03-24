@@ -18,36 +18,19 @@ It is a centralized, versioned library of GitHub Copilot assets — coding instr
 - **Composable** — mix and match types (`blazor,csharp,tsql`) to assemble the right context for any stack
 - **No lock-in** — assets land in your `.github/` folder as plain files; you own them
 
-## Repository Structure
+---
 
-```
-.github/
-├── common/              # Pulled into every project
-│   ├── instructions/
-│   └── prompts/
-├── project-type/              
-│   ├── instructions/
-│   ├── prompts/
-│   ├── agents/
-│   └── skills/
+## Getting Started
+
+### Step 1 — Run the sync from your project root
+
+No installation required. Run this command from the **root of your project**, replacing `cam96` with the GitHub user or org that owns this repository. Specify one or more [project types](#available-project-types) with `--types`.
+
+```powershell
+npx github:cam96/fenrir-sdk --types blazor,csharp
 ```
 
-## Asset Types
-
-| File type | Extension | Destination | Purpose |
-|---|---|---|---|
-| Instructions | `.instructions.md` | `.github/instructions/` | Rules automatically applied by Copilot based on `applyTo` glob |
-| Prompts | `.prompt.md` | `.github/prompts/` | Reusable prompt templates invokable from Copilot Chat |
-| Agents | `.agent.md` | `.github/agents/` | Custom agent modes with specific tool sets and personas |
-| Skills | `SKILL.md` | `.github/skills/{name}/` | Domain-specific knowledge invokable by name in Copilot Chat |
-
-## Using in a Consuming Project
-
-Both scenarios use `npx` to run the sync directly from this GitHub repository — no local clone or script copy needed. The `common/` assets are always included automatically alongside the types you specify.
-
-The sync copies two things:
-
-All assets — instructions, prompts, agents, and skills — are merged into your project's `.github/` folder.
+That's it. The sync pulls assets directly from GitHub and writes them into your project's `.github/` folder.
 
 ```
 .github/
@@ -55,57 +38,19 @@ All assets — instructions, prompts, agents, and skills — are merged into you
 ├── prompts/         ← merged from common + selected types
 ├── agents/          ← merged from selected types
 └── skills/          ← merged from selected types
-    ├── csharp-async/
-    ├── csharp-xunit/
-    ├── dotnet-best-practices/
-    ├── ef-core/
-    ├── fluentui-blazor/
-    └── ...
 ```
+
+The `common/` assets are always included automatically — you only need to specify the types relevant to your stack.
 
 ---
 
-### Fresh install into a project
+### Step 2 — Commit the `.github/` folder
 
-Run this from the **root of your project**. Replace `cam96` with the GitHub user or organization that owns this repository. Specify one or more project types with `--types`.
-
-```powershell
-# Blazor project
-npx github:cam96/fenrir-sdk --types blazor
-
-# Blazor project with C# standards (recommended — Blazor uses C#)
-npx github:cam96/fenrir-sdk --types blazor,csharp
-
-# Web API project with C# and T-SQL
-npx github:cam96/fenrir-sdk --types web-api,csharp,tsql
-
-# Azure Functions project
-npx github:cam96/fenrir-sdk --types function-app,csharp
-```
-
----
-
-### Update an already-installed project to the latest assets
-
-`npx` caches packages locally. To force it to fetch the latest version from GitHub and overwrite existing files, add the `--yes` flag:
+The synced files are plain text. Commit them like any other source file so your team gets consistent Copilot behaviour immediately.
 
 ```powershell
-# Update a Blazor + C# project (additive — keeps any locally added files)
-npx --yes github:cam96/fenrir-sdk --types blazor,csharp
-
-# Update a Web API project
-npx --yes github:cam96/fenrir-sdk --types web-api,csharp,tsql
-```
-
-#### Updating with a clean sync (`--clean`)
-
-Add `--clean` when you want your local state to exactly mirror the SDK — for example, after a skill has been removed from the SDK and you want it deleted locally too.
-
-> **Warning:** `--clean` permanently deletes everything inside `.github/instructions/`, `.github/prompts/`, `.github/agents/`, and `.github/skills/` before repopulating from the SDK. Any files you added to those folders manually will be lost. Only use this flag if you intentionally want a full reset.
-
-```powershell
-# Full clean sync — local state will exactly match the SDK
-npx --yes github:cam96/fenrir-sdk --types blazor,csharp --clean
+git add .github/
+git commit -m "chore: sync Copilot assets from fenrir-sdk"
 ```
 
 ---
@@ -128,50 +73,88 @@ npx github:cam96/fenrir-sdk --types blazor,csharp,tsql
 
 ---
 
+## Staying Up to Date
 
-## Adding a New Project Type
+`npx` caches packages locally, so running the same command again won't pull the latest changes. Use `--yes` to force a fresh fetch:
 
-1. Create a folder under `.github/<type>/`
-2. Add `instructions/`, `prompts/`, `agents/`, and/or `skills/` subfolders with the relevant files
-3. Add the new type to the `VALID_TYPES` array in [bin/sync.js](bin/sync.js)
+```powershell
+npx --yes github:cam96/fenrir-sdk --types blazor,csharp
+```
+
+This is **additive** — it overwrites SDK-managed files but leaves any files you added locally untouched.
+
+### Full reset with `--clean`
+
+Add `--clean` when you want your local state to exactly mirror the SDK, including removing assets that have been deleted from the SDK.
+
+> **Warning:** `--clean` permanently deletes everything inside `.github/instructions/`, `.github/prompts/`, `.github/agents/`, and `.github/skills/` before repopulating. Any locally added files in those folders will be lost.
+
+```powershell
+npx --yes github:cam96/fenrir-sdk --types blazor,csharp --clean
+```
 
 ---
 
-## Prompts
+## Contributing
 
-These prompts are available in Copilot Chat to help maintain the SDK itself.
+### Repository structure
 
-### `new-type`
-
-Bootstraps a new project type by discovering and downloading relevant assets from the [awesome-copilot](https://awesome-copilot.github.com/) and [skills.sh](https://skills.sh/) registries.
-
-Use this when adding a brand-new type that doesn't yet exist under `.github/`.
+Assets are organised under `.github/` by project type. A `common/` folder holds assets that are pulled into every consuming project regardless of the types they specify.
 
 ```
-/new-type typeName=blazor
+.github/
+├── common/              # Included in every sync
+│   ├── instructions/
+│   └── prompts/
+├── <type>/              # One folder per project type
+│   ├── instructions/
+│   ├── prompts/
+│   ├── agents/
+│   └── skills/
 ```
 
-The prompt will:
-1. Verify the type folder does not already exist
-2. Search both registries for instructions, prompts, agents, and skills relevant to the type
-3. Download and place each asset into the correct subfolder
-4. Summarize what was added
+Each asset type has a defined file extension and destination in consuming projects:
+
+| Asset | Extension | Destination | Purpose |
+|---|---|---|---|
+| Instructions | `.instructions.md` | `.github/instructions/` | Rules automatically applied by Copilot based on `applyTo` glob |
+| Prompts | `.prompt.md` | `.github/prompts/` | Reusable prompt templates invokable from Copilot Chat |
+| Agents | `.agent.md` | `.github/agents/` | Custom agent modes with specific tool sets and personas |
+| Skills | `SKILL.md` | `.github/skills/{name}/` | Domain-specific knowledge invokable by name in Copilot Chat |
 
 ---
 
-### `update-type`
+### Adding a new project type
 
-Updates an existing project type by discovering new assets from the registries that aren't already present locally.
-
-Use this when a type already exists and you want to pull in anything new from the registries.
+The fastest way is to use the `new-type` prompt in Copilot Chat — it will search the [awesome-copilot](https://awesome-copilot.github.com/) and [skills.sh](https://skills.sh/) registries, download relevant assets, and place them in the right folders automatically.
 
 ```
-/update-type typeName=blazor
+/new-type typeName=<your-type>
 ```
 
-The prompt will:
-1. Verify the type folder exists (suggests `new-type` if it doesn't)
-2. Inventory the current contents
-3. Search both registries for assets not yet present
-4. Download and add any new assets, leaving existing files untouched
-5. Summarize what was added
+To add a type manually:
+
+1. Create a folder at `.github/<type>/`
+2. Add any combination of `instructions/`, `prompts/`, `agents/`, and `skills/` subfolders with the relevant files
+3. Register the new type by adding it to the `VALID_TYPES` array in [bin/sync.js](bin/sync.js)
+
+---
+
+### Updating an existing project type
+
+Use the `update-type` prompt to discover and pull in new assets from the registries that aren't already present locally:
+
+```
+/update-type typeName=<your-type>
+```
+
+To update manually, add or edit files in the relevant `.github/<type>/` subfolders. Existing files in consuming projects will be overwritten on their next sync.
+
+---
+
+### Prompts reference
+
+| Prompt | When to use |
+|---|---|
+| `/new-type typeName=x` | Bootstrap a brand-new type folder from registry assets |
+| `/update-type typeName=x` | Discover and add new registry assets to an existing type |
