@@ -1,18 +1,6 @@
 <div align="center">
 
-⬜⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛                               
-⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛                               
-⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛                               
-⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛                               
-⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛                               
-⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛                               
-⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛                               
-⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛                               
-⬛⬛⬛⬜⬜⬜⬜⬛⬛⬜⬜⬜⬜⬛⬛                               
-⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛                               
-⬛⬛⬛⬛⬜⬛⬛⬛⬛⬛⬛⬛⬜⬛⬛                               
-⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛                               
-⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜                                                                
+<img src="docs/fenrir.svg" alt="Fenrir" width="320"/>
 
 # fenrir-sdk
 
@@ -27,43 +15,11 @@ A central repository of GitHub Copilot customization assets — instructions, pr
 ├── common/              # Pulled into every project
 │   ├── instructions/
 │   └── prompts/
-├── blazor/              # Blazor Server / WebAssembly
+├── project-type/              # Blazor Server / WebAssembly
 │   ├── instructions/
 │   ├── prompts/
 │   ├── agents/
 │   └── skills/
-│       └── fluentui-blazor/
-├── csharp/              # General C# / .NET
-│   ├── instructions/
-│   ├── prompts/
-│   ├── agents/
-│   └── skills/
-│       ├── csharp-async/
-│       ├── csharp-xunit/
-│       ├── dotnet-best-practices/
-│       └── ef-core/
-├── web-api/             # ASP.NET Core Web API / Minimal API
-│   ├── instructions/
-│   ├── prompts/
-│   ├── agents/
-│   └── skills/
-│       └── aspnet-minimal-api-openapi/
-├── function-app/        # Azure Functions (isolated worker model)
-│   ├── instructions/
-│   ├── prompts/
-│   ├── agents/
-│   └── skills/
-│       └── appinsights-instrumentation/
-└── tsql/                # T-SQL / SQL Server
-    ├── instructions/
-    ├── prompts/
-    ├── agents/
-    └── skills/
-        ├── sql-code-review/
-        └── sql-optimization/
-
-scripts/
-└── sync-copilot.ps1     # Sync script for consuming projects
 ```
 
 ## Asset Types
