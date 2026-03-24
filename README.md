@@ -8,6 +8,8 @@
 
 </div>
 
+# Purpose
+
 Most teams copy-paste Copilot instructions between repos, let them drift out of sync, and end up with inconsistent AI behaviour across projects. **fenrir-sdk** solves that.
 
 It is a centralized, versioned library of GitHub Copilot assets — coding instructions, reusable prompts, custom agents, and skill definitions — organized by project type. Any project can pull in exactly the assets it needs with a single `npx` command, and stay up to date as the SDK evolves.
