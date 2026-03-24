@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="logo.png" alt="Fenrir SDK" width="320"/>
+<img src="logo.png" alt="Fenrir SDK" width="160"/>
 
 # fenrir-sdk
 
