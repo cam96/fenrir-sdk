@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/fenrir.svg" alt="Fenrir" width="320"/>
+<img src="logo.png" alt="Fenrir SDK" width="320"/>
 
 # fenrir-sdk
 
@@ -15,7 +15,7 @@ A central repository of GitHub Copilot customization assets — instructions, pr
 ├── common/              # Pulled into every project
 │   ├── instructions/
 │   └── prompts/
-├── project-type/              # Blazor Server / WebAssembly
+├── project-type/              
 │   ├── instructions/
 │   ├── prompts/
 │   ├── agents/
@@ -118,24 +118,50 @@ npx github:cam96/fenrir-sdk --types blazor,csharp,tsql
 
 ---
 
-## Skills Index
-
-Skills are invokable by name in GitHub Copilot Chat (Agent mode). After syncing, trigger them by describing the task:
-
-| Skill | Project type | Trigger phrases |
-|---|---|---|
-| `csharp-async` | csharp | *"review my async code"*, *"best practices for async"* |
-| `csharp-xunit` | csharp | *"write unit tests"*, *"xunit best practices"* |
-| `dotnet-best-practices` | csharp | *"review this C# code"*, *".NET best practices"* |
-| `ef-core` | csharp | *"EF Core best practices"*, *"review my DbContext"* |
-| `fluentui-blazor` | blazor | *"FluentUI component"*, *"Fluent dialog"*, *"FluentSelect"* |
-| `aspnet-minimal-api-openapi` | web-api | *"create a minimal API endpoint"*, *"add OpenAPI docs"* |
-| `appinsights-instrumentation` | function-app | *"add Application Insights"*, *"instrument my app"* |
-| `sql-code-review` | tsql | *"review this SQL"*, *"SQL code review"* |
-| `sql-optimization` | tsql | *"optimize this query"*, *"SQL performance"* |
 
 ## Adding a New Project Type
 
 1. Create a folder under `.github/<type>/`
 2. Add `instructions/`, `prompts/`, `agents/`, and/or `skills/` subfolders with the relevant files
-3. Add the new type to the `ValidateSet` in [scripts/sync-copilot.ps1](scripts/sync-copilot.ps1) and to the `VALID_TYPES` array in [bin/sync.js](bin/sync.js)
+3. Add the new type to the `VALID_TYPES` array in [bin/sync.js](bin/sync.js)
+
+---
+
+## Prompts
+
+These prompts are available in Copilot Chat to help maintain the SDK itself.
+
+### `new-type`
+
+Bootstraps a new project type by discovering and downloading relevant assets from the [awesome-copilot](https://awesome-copilot.github.com/) and [skills.sh](https://skills.sh/) registries.
+
+Use this when adding a brand-new type that doesn't yet exist under `.github/`.
+
+```
+/new-type typeName=blazor
+```
+
+The prompt will:
+1. Verify the type folder does not already exist
+2. Search both registries for instructions, prompts, agents, and skills relevant to the type
+3. Download and place each asset into the correct subfolder
+4. Summarize what was added
+
+---
+
+### `update-type`
+
+Updates an existing project type by discovering new assets from the registries that aren't already present locally.
+
+Use this when a type already exists and you want to pull in anything new from the registries.
+
+```
+/update-type typeName=blazor
+```
+
+The prompt will:
+1. Verify the type folder exists (suggests `new-type` if it doesn't)
+2. Inventory the current contents
+3. Search both registries for assets not yet present
+4. Download and add any new assets, leaving existing files untouched
+5. Summarize what was added
