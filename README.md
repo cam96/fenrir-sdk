@@ -103,17 +103,17 @@ npx github:cam96/fenrir-sdk --types function-app,csharp
 
 ### Update an already-installed project to the latest assets
 
-`npx` caches packages locally. To force it to fetch the latest version from GitHub and overwrite existing files, add the `--yes` flag:
+`npx` caches packages locally. To force it to fetch the latest version from GitHub and overwrite existing files, add the `--yes` flag. Add `--clean` to remove any assets that no longer exist in the SDK (e.g. deleted skills):
 
 ```powershell
 # Update a Blazor + C# project to the latest assets
-npx --yes github:cam96/fenrir-sdk --types blazor,csharp
+npx --yes github:cam96/fenrir-sdk --types blazor,csharp --clean
 
 # Update a Web API project
-npx --yes github:cam96/fenrir-sdk --types web-api,csharp,tsql
+npx --yes github:cam96/fenrir-sdk --types web-api,csharp,tsql --clean
 ```
 
-> The `--yes` flag bypasses the npx cache and re-downloads the repository, ensuring you always get the latest instructions, prompts, and agents. Run this whenever the SDK has been updated.
+> `--yes` bypasses the npx cache and re-downloads the repository. `--clean` wipes `.github/instructions/`, `.github/prompts/`, `.github/agents/`, and `.github/skills/` before copying, ensuring your local state exactly matches the SDK. Omit `--clean` to preserve any assets you've added locally.
 
 ---
 

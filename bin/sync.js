@@ -34,6 +34,8 @@ if (invalidTypes.length > 0) {
   process.exit(1);
 }
 
+const isClean = args.includes("--clean");
+
 // ---------------------------------------------------------------------------
 // Paths
 // ---------------------------------------------------------------------------
@@ -43,6 +45,16 @@ const targetGithubDir = path.join(process.cwd(), ".github");
 // ---------------------------------------------------------------------------
 // Copy
 // ---------------------------------------------------------------------------
+if (isClean) {
+  for (const dir of ["instructions", "prompts", "agents", "skills"]) {
+    const target = path.join(targetGithubDir, dir);
+    if (fs.existsSync(target)) {
+      fs.rmSync(target, { recursive: true, force: true });
+      console.log(`Cleaned .github/${dir}/`);
+    }
+  }
+}
+
 const sources = ["common", ...requestedTypes];
 
 for (const source of sources) {
@@ -105,6 +117,7 @@ into ~/.agents/skills/ for VS Code Copilot to pick up.
 
 Options:
   --types, -t   Comma-separated list of project types (required)
+  --clean        Remove existing .github asset dirs before syncing
   --help,  -h   Show this help message
 
 Valid types:
