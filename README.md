@@ -4,9 +4,19 @@
 
 # fenrir-sdk
 
+**One source of truth for GitHub Copilot customizations across every project.**
+
 </div>
 
-A central repository of GitHub Copilot customization assets — instructions, prompts, and custom agents — organized by project type. Consuming projects run a sync script to pull in only the assets relevant to their stack.
+Most teams copy-paste Copilot instructions between repos, let them drift out of sync, and end up with inconsistent AI behaviour across projects. **fenrir-sdk** solves that.
+
+It is a centralized, versioned library of GitHub Copilot assets — coding instructions, reusable prompts, custom agents, and skill definitions — organized by project type. Any project can pull in exactly the assets it needs with a single `npx` command, and stay up to date as the SDK evolves.
+
+**Why this matters:**
+- **Consistency** — every project that uses the same type gets the same Copilot behaviour, enforced automatically
+- **Zero maintenance overhead** — update the SDK once, propagate to all consuming projects on next sync
+- **Composable** — mix and match types (`blazor,csharp,tsql`) to assemble the right context for any stack
+- **No lock-in** — assets land in your `.github/` folder as plain files; you own them
 
 ## Repository Structure
 
