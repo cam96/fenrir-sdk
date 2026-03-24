@@ -1,7 +1,3 @@
----
-mode: edit
----
-
 Create a new Blazor component named `${componentName}`.
 
 Requirements:

@@ -1,7 +1,3 @@
----
-mode: edit
----
-
 Create a new Azure Function named `${functionName}` using the isolated worker model.
 
 Requirements:

@@ -1,4 +1,22 @@
+<div align="center">
+
+⬜⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬜⬜⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬜⬜⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬜
+⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛
+⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛⬛🟨🟨🟨⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛
+⬛⬛⬛⬜⬜⬜⬜⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬜⬜⬜⬜⬛⬛⬛
+⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜⬛⬛⬛
+⬛⬛⬛⬛⬜⬛⬛⬛⬛⬛⬛⬛⬜⬛⬛⬛⬛⬛⬛⬛⬜⬛⬛⬛⬛⬛⬛⬛⬜⬛⬛⬛⬛⬛⬛⬛⬜⬛⬛⬛⬛⬛⬛⬛⬜⬛⬛⬛
+⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
+⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜⬜⬜⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬜⬜
+
 # fenrir-sdk
+
+</div>
 
 A central repository of GitHub Copilot customization assets — instructions, prompts, and custom agents — organized by project type. Consuming projects run a sync script to pull in only the assets relevant to their stack.
 
@@ -103,17 +121,26 @@ npx github:cam96/fenrir-sdk --types function-app,csharp
 
 ### Update an already-installed project to the latest assets
 
-`npx` caches packages locally. To force it to fetch the latest version from GitHub and overwrite existing files, add the `--yes` flag. Add `--clean` to remove any assets that no longer exist in the SDK (e.g. deleted skills):
+`npx` caches packages locally. To force it to fetch the latest version from GitHub and overwrite existing files, add the `--yes` flag:
 
 ```powershell
-# Update a Blazor + C# project to the latest assets
-npx --yes github:cam96/fenrir-sdk --types blazor,csharp --clean
+# Update a Blazor + C# project (additive — keeps any locally added files)
+npx --yes github:cam96/fenrir-sdk --types blazor,csharp
 
 # Update a Web API project
-npx --yes github:cam96/fenrir-sdk --types web-api,csharp,tsql --clean
+npx --yes github:cam96/fenrir-sdk --types web-api,csharp,tsql
 ```
 
-> `--yes` bypasses the npx cache and re-downloads the repository. `--clean` wipes `.github/instructions/`, `.github/prompts/`, `.github/agents/`, and `.github/skills/` before copying, ensuring your local state exactly matches the SDK. Omit `--clean` to preserve any assets you've added locally.
+#### Updating with a clean sync (`--clean`)
+
+Add `--clean` when you want your local state to exactly mirror the SDK — for example, after a skill has been removed from the SDK and you want it deleted locally too.
+
+> **Warning:** `--clean` permanently deletes everything inside `.github/instructions/`, `.github/prompts/`, `.github/agents/`, and `.github/skills/` before repopulating from the SDK. Any files you added to those folders manually will be lost. Only use this flag if you intentionally want a full reset.
+
+```powershell
+# Full clean sync — local state will exactly match the SDK
+npx --yes github:cam96/fenrir-sdk --types blazor,csharp --clean
+```
 
 ---
 

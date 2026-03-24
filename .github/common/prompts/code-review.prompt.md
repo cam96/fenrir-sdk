@@ -1,7 +1,3 @@
----
-mode: ask
----
-
 Review the selected code and provide feedback on:
 
 1. **Correctness** — Does the logic do what is intended?

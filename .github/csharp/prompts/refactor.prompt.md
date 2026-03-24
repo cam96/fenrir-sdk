@@ -1,7 +1,3 @@
----
-mode: edit
----
-
 Refactor the selected C# code to:
 
 1. Apply guard clauses at the top of the method.

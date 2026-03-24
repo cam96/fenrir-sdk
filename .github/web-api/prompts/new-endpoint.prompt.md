@@ -1,7 +1,3 @@
----
-mode: edit
----
-
 Create a new minimal API endpoint group for `${resourceName}`.
 
 Requirements:
